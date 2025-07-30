@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Techfest IIT Bombay - Landing Page</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Basic Setup --- */
+        :root {
+            --primary-color: #00bfff; /* Deep Sky Blue */
+            --secondary-color: #0077b6; /* A deeper blue */
+            --background-color: #050a18;
+            --card-bg-color: rgba(10, 22, 48, 0.5);
+            --text-color: #e0e0e0;
+            --header-bg: rgba(5, 10, 24, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Smooth scroll ke liye */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* --- Background Animation --- */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(0, 191, 255, 0.15);
+            animation: float 25s linear infinite;
+            bottom: -150px;
+        }
+        .shape:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+        .shape:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+        .shape:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+        .shape:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+        .shape:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+        .shape:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
+        .shape:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+        .shape:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+        .shape:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+        .shape:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+
+        @keyframes float {
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* --- Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 191, 255, 0.2);
+            z-index: 100;
+            transition: background-color 0.3s;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav a {
+            font-size: 1em;
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 30px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--primary-color);
+            color: #fff;
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+        
+        /* --- General Section Styling --- */
+        .page-section {
+            min-height: 100vh;
+            padding: 120px 5% 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 40px;
+            color: #fff;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* --- Hero Section --- */
+        .hero-content h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: #fff;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0 auto 20px;
+        }
+
+        .hero-content p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-color);
+            color: #fff;
+            padding: 15px 35px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 50px;
+            border: 2px solid var(--primary-color);
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px var(--primary-color);
+            background-color: transparent;
+        }
+        
+        /* --- Tasks Section --- */
+        .task-card {
+            background-color: var(--card-bg-color);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 191, 255, 0.2);
+            max-width: 800px;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .task-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 191, 255, 0.2);
+        }
+        
+        /* --- Rewards Section --- */
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+        
+        .reward-card {
+            background-color: var(--card-bg-color);
+            padding: 40px 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 191, 255, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .reward-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(0, 191, 255, 0.3);
+        }
+        
+        .reward-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        /* --- Contact Section --- */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--secondary-color);
+            background-color: rgba(5, 10, 24, 0.8);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+        
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            box-shadow: 0 0 15px var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        /* --- Scroll Animation Classes --- */
+        .hidden {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, filter 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .show {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateY(0);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px 20px;
+            }
+            .logo { margin-bottom: 15px; }
+            nav a { margin: 0 10px; font-size: 0.9em; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="background-animation">
+        <div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div>
+    </div>
+
+    <header>
+        <a href="#home" class="logo">Techfest</a>
+        <nav>
+            <a href="#home" class="active">Home</a>
+            <a href="#tasks">Tasks</a>
+            <a href="#rewards">Rewards</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="page-section">
+        <div class="hero-content">
+            <h1>Fuel The Future</h1>
+            <p>Be the developer who fuels the engine of Asia's biggest tech movement. Build, create, and innovate with Techfest, IIT Bombay.</p>
+            <a href="#tasks" class="cta-button">Explore Tasks</a>
+        </div>
+    </section>
+
+    <!-- Tasks Section -->
+    <section id="tasks" class="page-section">
+        <div class="hidden">
+            <h2 class="section-title">Your Mission</h2>
+            <div class="task-card">
+                <h3>Deploy with an Animation</h3>
+                <p style="margin-top: 15px; line-height: 1.6;">Build and deploy a creative one-section landing page using pure HTML/CSS with an eye-catching hero animation. Host it and attach the link.</p>
+                <p style="margin-top: 20px; font-size: 1.2rem; color: var(--primary-color); font-weight: bold;">Points: 30</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Rewards Section -->
+    <section id="rewards" class="page-section">
+        <div class="hidden">
+            <h2 class="section-title">Rewards</h2>
+            <div class="rewards-grid">
+                <div class="reward-card">
+                    <h3>Certificates</h3>
+                    <p>Get official Techfest, IIT Bombay certificates to boost your profile.</p>
+                </div>
+                <div class="reward-card">
+                    <h3>Exclusive Merchandise</h3>
+                    <p>Win cool swags, t-shirts, and other exclusive Techfest goodies.</p>
+                </div>
+                <div class="reward-card">
+                    <h3>Internship Opportunities</h3>
+                    <p>Top performers get a chance to intern with our partner companies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="page-section">
+        <div class="hidden">
+            <h2 class="section-title">Get In Touch</h2>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit" class="cta-button" style="width: 100%;">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // --- Scroll Animations ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                } else {
+                    // Optional: remove class to re-animate on scroll up
+                    // entry.target.classList.remove('show');
+                }
+            });
+        });
+
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
+        
+        // --- Active Nav Link on Scroll ---
+        const sections = document.querySelectorAll('.page-section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === '#' + current) {
+                    a.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
